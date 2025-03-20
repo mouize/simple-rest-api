@@ -38,4 +38,19 @@ class UserRepository
     {
         User::findOrFail($id)->delete();
     }
+
+    public function getUserByEmail(string $email): ?User
+    {
+        return User::where('email', $email)->first();
+    }
+
+    public function revokeUserTokens(User $user): void
+    {
+        $user->tokens()->delete();
+    }
+
+    public function findOrFail(int $id): User
+    {
+        return User::findOrFail($id);
+    }
 }
